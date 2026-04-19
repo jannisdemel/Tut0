@@ -894,6 +894,7 @@
     }
     .cols-2 { grid-template-columns: 1fr 1fr; }
     .cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
 
     /* ── Card ───────────────────────────────────────────── */
     .card {
@@ -1367,7 +1368,7 @@
       <div class="eyebrow light" style="text-align: center; margin-bottom: 28px;">Part 01</div>
       <h1 style="font-size: 88px; font-weight: 800; color: #fff; letter-spacing: -0.03em; font-family: var(--font-display);">Setup</h1>
       <p style="margin-top: 28px; color: oklch(0.55 0.01 240); font-size: var(--ts-body);">
-        VS Code · uv  · Github Copilot
+        VS Code · uv  · GitHub Copilot
       </p>
     </div>
   </section>
@@ -1864,7 +1865,7 @@
           <div style="padding: 28px 36px; background: #fff; display: flex; gap: 24px; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.06);">
             <div style="width: 52px; height: 52px; border-radius: 14px; background: oklch(0.58 0.19 168 / 0.12); color: oklch(0.58 0.19 168); font-size: var(--ts-small); display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; border: 1.5px solid oklch(0.58 0.19 168 / 0.25);">2</div>
             <div>
-              <div style="font-size: var(--ts-small); font-weight: 700;">Copilot analyses and proposes a plan</div>
+              <div style="font-size: var(--ts-small); font-weight: 700;">Copilot analyzes and proposes a plan</div>
               <div style="font-size: var(--ts-label); color: var(--text-muted);">No files are touched yet</div>
             </div>
           </div>
@@ -1949,6 +1950,65 @@
       </p>
       <div style="display: flex; gap: 20px; margin-top: 12px;">
         <a class="pill dark-pill" href="https://github.com/jannisdemel/Tut0" target="_blank" rel="noopener noreferrer">github.com/jannisdemel/Tut0</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────── 15 Word of Warning ──── -->
+  <section data-label="A Word of Warning" style="
+    padding: var(--sp-pt) var(--sp-px) var(--sp-pb);
+  ">
+    <div class="eyebrow" style="margin-bottom: 20px;">A word of warning</div>
+    <h1 style="font-family: var(--font-display); margin-bottom: 22px;">How to use AI agents safely</h1>
+    <p style="font-size: var(--ts-body); color: var(--text-muted); line-height: 1.6; max-width: 1280px; margin-bottom: 46px;">
+      AI agents are powerful helpers, but with great power comes great responsibility. Follow these best practices to use them safely and effectively in your projects.
+    </p>
+
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 28px;">
+      <div class="cols cols-4" style="flex: 1; align-items: stretch; gap: 24px;">
+        <div class="card" style="gap: 16px; padding: 36px;">
+          <div style="font-size: 54px; color: var(--accent); font-family: var(--font-display); font-weight: 800; line-height: 1;">01</div>
+          <div class="card-title">Review generated code first</div>
+          <div class="card-body">
+            Never execute blindly. Generated code can hide subtle bugs, insecure patterns, or harmful logic.
+          </div>
+        </div>
+
+        <div class="card" style="gap: 16px; padding: 36px;">
+          <div style="font-size: 54px; color: var(--accent2); font-family: var(--font-display); font-weight: 800; line-height: 1;">02</div>
+          <div class="card-title">Watch for prompt injection</div>
+          <div class="card-body">
+            Treat external content (web pages, documents, emails, copied text) as untrusted instructions.
+          </div>
+        </div>
+
+        <div class="card" style="gap: 16px; padding: 36px;">
+          <div style="font-size: 54px; color: var(--accent3); font-family: var(--font-display); font-weight: 800; line-height: 1;">03</div>
+          <div class="card-title">Apply least privilege</div>
+          <div class="card-body">
+            Grant only the minimum permissions needed for the task to reduce blast radius if compromised.
+          </div>
+        </div>
+
+        <div class="card" style="gap: 16px; padding: 36px;">
+          <div style="font-size: 54px; color: oklch(0.62 0.18 45); font-family: var(--font-display); font-weight: 800; line-height: 1;">04</div>
+          <div class="card-title">Keep humans in the loop</div>
+          <div class="card-body">
+            Require explicit approval for irreversible actions like  deleting, purchasing, or permission changes.
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="background: oklch(0.70 0.18 45 / 0.09); border-color: oklch(0.70 0.18 45 / 0.22); padding: 30px 42px;">
+        <div style="display: flex; gap: 22px; align-items: flex-start;">
+          <div style="width: 52px; height: 52px; border-radius: 14px; background: oklch(0.70 0.18 45 / 0.14); color: oklch(0.62 0.18 45); display: flex; align-items: center; justify-content: center; font-size: var(--ts-small); font-weight: 800; flex-shrink: 0;">!</div>
+          <div>
+            <div class="card-title" style="color: oklch(0.48 0.15 45); margin-bottom: 8px;">Reminder</div>
+            <div class="card-body" style="font-size: var(--ts-small);">
+              This deck reflects what works for me right now and what could fit into the time constraints. AI agents are a new, fast-evolving technology, so test different workflows and choose what works best for you.
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
