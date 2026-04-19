@@ -1,5 +1,6 @@
 # Instructor-only materials
 task2/instructor_answer_key.md
+task1/task1_xyz_solution.ipynb
 task2/task2_molecule_match_solution.ipynb
 
 # uv / local environments
@@ -22,3 +23,6 @@ __pycache__/
 # Local environment files
 .env
 .env.*
+
+# VS Code
+.vscode/
