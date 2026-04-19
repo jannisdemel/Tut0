@@ -141,6 +141,13 @@ When Copilot uses repository instructions, they are added automatically. In
 Copilot Chat, you can often verify this by checking the response references for
 `.github/copilot-instructions.md`.
 
+### More advanced agent features
+
+There are many useful agent features that we will not cover in the tutorial
+because of time: agent skills, MCP servers, custom tools, cloud coding agents,
+and larger multi-agent workflows. You do not need these for Tutorium 0, but they
+are good topics to explore later. Most of them are well-documented in <https://docs.github.com/en/copilot>.
+
 ## Optional tools for existing subscriptions
 
 ### If you already have ChatGPT
@@ -240,5 +247,4 @@ codex
 
 When prompted, sign in with ChatGPT if your plan supports Codex, or configure an
 API key if you are using API billing.
-
 
