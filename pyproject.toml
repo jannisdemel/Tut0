@@ -7,7 +7,6 @@ dependencies = [
     "jupyter",
     "matplotlib",
     "numpy",
-    "pandas",
 ]
 
 [tool.uv]
