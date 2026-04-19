@@ -16,3 +16,5 @@ Available packages:
 - Read `pyproject.toml` before suggesting imports or installs.
 - The declared dependencies are `ipykernel`, `jupyter`, `matplotlib`and `numpy`.
 - Prefer these available packages; do not suggest installing additional packages unless explicitly requested.
+
+The final solution (so the four found molecules) should be placed in the markdown cell under the "Final answer" section.
