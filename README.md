@@ -1,61 +1,105 @@
-# GMLQC Tutorial Environment
+# Geometric Machine Learning in Quantum Chemistry: Tutorium 0
 
-This project uses `uv` to create and manage the Python virtual environment.
+This repository contains the notebooks and data files for Tutorium 0. 
 
-## Install uv
+## What you need to install
 
-If `uv` is not installed yet, install it with:
+### 1. Visual Studio Code
+
+Install VS Code from <https://code.visualstudio.com/>.
+
+After installing VS Code, open the Extensions view and install:
+
+- **Python** by Microsoft
+- **Jupyter** by Microsoft
+- **GitHub Copilot** by GitHub
+
+Sign in to VS Code with your GitHub account when Copilot asks you to. You need a
+GitHub account with Copilot access. Students can get Copilot through the
+GitHub Student Developer Pack, but that has to be activated on GitHub first.
+
+### 2. uv
+
+We use `uv` to create the Python environment and install the packages for this
+repo.
+
+Install `uv` from the official instructions:
+<https://docs.astral.sh/uv/getting-started/installation/>
+
+Quick install commands:
+
+macOS / Linux:
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Then restart your terminal, or make sure the `uv` command is available:
+
+Windows PowerShell:
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+After installing, close and reopen your terminal, then check:
 
 ```bash
 uv --version
 ```
 
-## Create the virtual environment
+### 3. Python
 
-From this project folder, run:
+This repo needs Python 3.11 or newer.
+
+You do **not** need to install Python separately if you use `uv`. `uv` can
+download and manage Python for you. To make sure a suitable Python is available,
+run:
+
+```bash
+uv python install 3.11
+```
+
+If you already have Python 3.11 or newer installed, that is also fine. `uv` will
+usually find and use it automatically.
+
+## Set up this repository
+
+Open a terminal in the repository folder. In VS Code, you can use
+**Terminal > New Terminal**.
+
+Run:
 
 ```bash
 uv sync
 ```
 
-This creates a `.venv` folder and installs the packages listed in `pyproject.toml`.
+This creates a local `.venv` folder and installs the packages listed in
+`pyproject.toml`.
 
-## Activate the environment
-
-On macOS or Linux:
-
-```bash
-source .venv/bin/activate
-```
-
-On Windows PowerShell:
-
-```powershell
-.venv\Scripts\Activate.ps1
-```
-
-## Run the test notebook
-
-After activating the environment, open Jupyter:
+Then test the setup:
 
 ```bash
-jupyter notebook
+uv run python -c "import numpy, matplotlib, jupyter, ipykernel; print('setup ok')"
 ```
 
-Then open `test_imports.ipynb` and run the cell. It should import NumPy, pandas, and Matplotlib, then print:
+If you see `setup ok`, the Python environment works.
 
-```text
-hello world
-```
+## Run the notebooks in VS Code
 
-You can also run commands without manually activating the environment by prefixing them with `uv run`, for example:
+1. Open this folder in VS Code.
+2. Open `task0/test_imports.ipynb`.
+3. Click **Select Kernel** in the top right of the notebook.
+4. Choose the environment from this repository. It will usually be called
+   `.venv`, `gmlqc-tut0`, or something similar.
+5. Click **Run All**.
 
-```bash
-uv run jupyter notebook
-```
+
+## Setup checklist
+
+- VS Code installed
+- Python and Jupyter extensions installed in VS Code
+- GitHub Copilot extension installed in VS Code
+- Signed in to GitHub in VS Code
+- `uv --version` works in the terminal
+- `uv sync` runs successfully in this repository
+- `task0/test_imports.ipynb` runs with the repository kernel
