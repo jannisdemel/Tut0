@@ -18,7 +18,7 @@ Available packages:
 - Prefer these available packages; do not suggest installing additional packages unless explicitly requested.
 
 Plan mode:
-- If we need are in plan mode to plan teh solution, ask questions to clarify the task and get user input.
+- If we need are in plan mode to plan the solution, ask questions to clarify the task and get user input.
 
 The final solution (so the four found molecules) should be placed in the markdown cell under the "Final answer" section.
 
