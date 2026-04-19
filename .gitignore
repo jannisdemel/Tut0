@@ -17,8 +17,6 @@ __pycache__/
 # Jupyter
 .ipynb_checkpoints/
 
-# Generated slides
-slides/
 
 # macOS
 .DS_Store
