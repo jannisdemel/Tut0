@@ -209,42 +209,10 @@ Claude Code lets you use Claude as a coding agent from the terminal.
 
 Install docs: <https://docs.anthropic.com/en/docs/claude-code/getting-started>
 
-Common install command:
-
-```bash
-npm install -g @anthropic-ai/claude-code
-```
-
-Then run:
-
-```bash
-claude
-```
 
 ### OpenAI Codex CLI
 
 Codex CLI lets you use OpenAI Codex from the terminal.
 
 Install docs and source: <https://github.com/openai/codex>
-
-Install with npm:
-
-```bash
-npm install -g @openai/codex
-```
-
-or, on macOS with Homebrew:
-
-```bash
-brew install --cask codex
-```
-
-Then run:
-
-```bash
-codex
-```
-
-When prompted, sign in with ChatGPT if your plan supports Codex, or configure an
-API key if you are using API billing.
 
