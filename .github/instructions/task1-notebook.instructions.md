@@ -11,3 +11,5 @@ Where to write code in `task1/task1_xyz.ipynb`:
 Do not place executable code in markdown cells.
 
 Only use the packages already importe in the first cell (`matplotlib` and `numpy`). Do not add new imports.
+
+If plan mode is used please ask a clarifying question even if it was not necessary (for educational purposes).
