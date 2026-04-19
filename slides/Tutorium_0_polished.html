@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tutorium 0 — Geometric ML in Quantum Chemistry</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <script>
 /**
@@ -634,17 +635,20 @@
   <style>
     /* ── Design tokens ──────────────────────────────────── */
     :root {
-      --bg-light:   #F4F5F7;
-      --bg-dark:    #12151E;
-      --bg-mid:     #1C2133;
-      --text-dark:  #12151E;
-      --text-light: #F4F5F7;
-      --text-muted: #6B7280;
-      --accent:     oklch(0.55 0.18 258);   /* indigo */
-      --accent2:    oklch(0.55 0.18 168);   /* teal */
-      --accent-dim: oklch(0.55 0.18 258 / 0.12);
+      --bg-light:   #F0F1F5;
+      --bg-dark:    #0D1018;
+      --bg-mid:     #161B2C;
+      --text-dark:  #0D1018;
+      --text-light: #EEF0F6;
+      --text-muted: #5A6275;
+      --accent:     oklch(0.58 0.20 258);   /* vivid indigo */
+      --accent2:    oklch(0.58 0.19 168);   /* teal */
+      --accent3:    oklch(0.70 0.18 45);    /* amber */
+      --accent-dim: oklch(0.58 0.20 258 / 0.13);
+      --accent-glow: oklch(0.58 0.20 258 / 0.22);
 
       --font:  'Inter', Helvetica, Arial, sans-serif;
+      --font-display: 'Inter', Helvetica, Arial, sans-serif;
       --mono:  'JetBrains Mono', 'Courier New', monospace;
 
       /* TYPE_SCALE (1920×1080) */
@@ -653,18 +657,82 @@
       --ts-sub:     44px;
       --ts-body:    34px;
       --ts-small:   28px;
-      --ts-label:   24px;
+      --ts-label:   22px;
 
       /* SPACING */
       --sp-px:   120px;
-      --sp-pt:   100px;
+      --sp-pt:   96px;
       --sp-pb:   80px;
       --sp-gap:  52px;
       --sp-item: 30px;
+
+      /* EFFECTS */
+      --shadow-card: 0 2px 12px rgba(0,0,0,0.07), 0 8px 32px rgba(0,0,0,0.05);
+      --shadow-dark: 0 4px 24px rgba(0,0,0,0.35);
+      --radius-card: 22px;
+      --radius-sm: 12px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #000; font-family: var(--font); }
+
+    /* ── Slide entrance animation ───────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes moleculePulse {
+      0%, 100% { opacity: 0.82; filter: drop-shadow(0 8px 36px rgba(0,0,0,0.55)); }
+      50% { opacity: 0.95; filter: drop-shadow(0 8px 60px oklch(0.58 0.20 258 / 0.3)); }
+    }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-18px); }
+    }
+    @keyframes driftA {
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+      50% { transform: translate3d(0, -16px, 0) rotate(1.25deg); }
+    }
+    @keyframes driftB {
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+      50% { transform: translate3d(9px, -13px, 0) rotate(-1.05deg); }
+    }
+    @keyframes driftC {
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+      50% { transform: translate3d(-8px, -14px, 0) rotate(0.92deg); }
+    }
+    @keyframes orbitGlow {
+      0%, 100% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -100; }
+    }
+
+    section[data-deck-active] .eyebrow   { animation: fadeUp 0.45s cubic-bezier(.22,1,.36,1) both; animation-delay: 0.05s; }
+    section[data-deck-active] h1         { animation: fadeUp 0.55s cubic-bezier(.22,1,.36,1) both; animation-delay: 0.12s; }
+    section[data-deck-active] h2         { animation: fadeUp 0.55s cubic-bezier(.22,1,.36,1) both; animation-delay: 0.18s; }
+    section[data-deck-active] .card      { animation: scaleIn 0.5s cubic-bezier(.22,1,.36,1) both; }
+    section[data-deck-active] .card:nth-child(1) { animation-delay: 0.20s; }
+    section[data-deck-active] .card:nth-child(2) { animation-delay: 0.28s; }
+    section[data-deck-active] .card:nth-child(3) { animation-delay: 0.36s; }
+    section[data-deck-active] .card:nth-child(4) { animation-delay: 0.44s; }
+    section[data-deck-active] .card:nth-child(5) { animation-delay: 0.52s; }
+    section[data-deck-active] .card:nth-child(6) { animation-delay: 0.60s; }
+    section[data-deck-active] .agenda-item { animation: fadeUp 0.45s cubic-bezier(.22,1,.36,1) both; }
+    section[data-deck-active] .agenda-item:nth-child(1) { animation-delay: 0.18s; }
+    section[data-deck-active] .agenda-item:nth-child(2) { animation-delay: 0.28s; }
+    section[data-deck-active] .agenda-item:nth-child(3) { animation-delay: 0.38s; }
+    section[data-deck-active] .agenda-item:nth-child(4) { animation-delay: 0.48s; }
+    section[data-deck-active] .steps li  { animation: fadeUp 0.45s cubic-bezier(.22,1,.36,1) both; }
+    section[data-deck-active] .steps li:nth-child(1) { animation-delay: 0.22s; }
+    section[data-deck-active] .steps li:nth-child(2) { animation-delay: 0.34s; }
+    section[data-deck-active] .steps li:nth-child(3) { animation-delay: 0.46s; }
 
     /* ── Shared slide base ──────────────────────────────── */
     section {
@@ -672,6 +740,16 @@
       flex-direction: column;
       background: var(--bg-light);
       color: var(--text-dark);
+    }
+
+    /* Light slide texture */
+    section:not(.dark)::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 80% 10%, oklch(0.58 0.20 258 / 0.04) 0%, transparent 55%),
+                        radial-gradient(circle at 10% 90%, oklch(0.58 0.19 168 / 0.035) 0%, transparent 45%);
+      pointer-events: none;
     }
 
     /* ── Dark slides ────────────────────────────────────── */
@@ -683,27 +761,41 @@
     /* ── Helpers ────────────────────────────────────────── */
     .eyebrow {
       font-size: var(--ts-label);
-      font-weight: 600;
-      letter-spacing: 0.12em;
+      font-weight: 700;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .eyebrow.light { color: oklch(0.75 0.12 258); }
+    .eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 2px;
+      background: currentColor;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .eyebrow.light { color: oklch(0.78 0.14 258); }
 
     h1 {
       font-size: var(--ts-title);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      font-family: var(--font-display);
     }
     h2 {
       font-size: var(--ts-sub);
-      font-weight: 500;
+      font-weight: 400;
       line-height: 1.3;
       color: var(--text-muted);
+      font-family: var(--font);
     }
-    .dark h2 { color: oklch(0.65 0.01 240); }
+    .dark h2 { color: oklch(0.62 0.03 240); }
 
     p, li {
       font-size: var(--ts-body);
@@ -714,18 +806,28 @@
 
     /* ── Code block ─────────────────────────────────────── */
     .code-block {
-      background: #0D1117;
-      border-radius: 16px;
+      background: #090D15;
+      border-radius: var(--radius-sm);
       padding: 36px 48px;
       font-family: var(--mono);
       font-size: var(--ts-small);
-      line-height: 1.7;
+      line-height: 1.75;
       color: #E6EDF3;
+      border: 1px solid rgba(255,255,255,0.07);
+      position: relative;
     }
-    .code-block .comment { color: #6E7681; }
-    .code-block .cmd { color: #79C0FF; }
-    .code-block .str { color: #A5D6FF; }
-    .code-block .ok  { color: #3FB950; font-weight: 500; }
+    .code-block::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    }
+    .code-block .comment { color: #4D5566; }
+    .code-block .cmd { color: #82AAFF; }
+    .code-block .str { color: #C3E88D; }
+    .code-block .ok  { color: #4EC9B0; font-weight: 600; }
 
     /* ── Step list ──────────────────────────────────────── */
     .steps { list-style: none; display: flex; flex-direction: column; gap: var(--sp-item); }
@@ -736,42 +838,53 @@
     }
     .step-num {
       flex-shrink: 0;
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
       background: var(--accent-dim);
       color: var(--accent);
-      font-size: 26px;
-      font-weight: 700;
+      font-size: 24px;
+      font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-top: 2px;
+      border: 1.5px solid oklch(0.58 0.20 258 / 0.22);
     }
     .step-text strong {
       display: block;
       font-size: var(--ts-body);
-      font-weight: 600;
-      margin-bottom: 4px;
+      font-weight: 700;
+      margin-bottom: 6px;
     }
     .step-text span {
       font-size: var(--ts-small);
       color: var(--text-muted);
+      line-height: 1.5;
     }
 
     /* ── Pill tag ───────────────────────────────────────── */
     .pill {
-      display: inline-block;
-      padding: 6px 20px;
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 22px;
       border-radius: 999px;
       font-size: var(--ts-small);
-      font-weight: 600;
+      font-weight: 700;
       background: var(--accent-dim);
       color: var(--accent);
+      border: 1.5px solid oklch(0.58 0.20 258 / 0.22);
+      letter-spacing: 0.01em;
     }
     .pill.teal {
-      background: oklch(0.55 0.18 168 / 0.12);
-      color: oklch(0.55 0.18 168);
+      background: oklch(0.58 0.19 168 / 0.12);
+      color: oklch(0.58 0.19 168);
+      border-color: oklch(0.58 0.19 168 / 0.25);
+    }
+    .pill.dark-pill {
+      background: oklch(0.58 0.20 258 / 0.18);
+      color: oklch(0.85 0.12 258);
+      border-color: oklch(0.58 0.20 258 / 0.35);
     }
 
     /* ── Two-column grid ────────────────────────────────── */
@@ -785,25 +898,40 @@
     /* ── Card ───────────────────────────────────────────── */
     .card {
       background: #fff;
-      border-radius: 20px;
-      padding: 48px;
+      border-radius: var(--radius-card);
+      padding: 46px;
       display: flex;
       flex-direction: column;
       gap: 18px;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(0,0,0,0.055);
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1), 0 12px 40px rgba(0,0,0,0.07);
+      transform: translateY(-1px);
     }
     .card.dark-card {
       background: var(--bg-mid);
+      border-color: rgba(255,255,255,0.07);
+      box-shadow: var(--shadow-dark);
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .card.dark-card:hover {
+      border-color: oklch(0.58 0.20 258 / 0.35);
+      transform: translateY(-2px);
     }
     .card-title {
       font-size: var(--ts-body);
       font-weight: 700;
+      letter-spacing: -0.01em;
     }
     .card-body {
       font-size: var(--ts-small);
-      line-height: 1.6;
+      line-height: 1.65;
       color: var(--text-muted);
     }
-    .dark .card-body { color: oklch(0.65 0.01 240); }
+    .dark .card-body { color: oklch(0.62 0.02 240); }
 
     /* ── Divider line ───────────────────────────────────── */
     hr.rule {
@@ -818,58 +946,85 @@
       display: flex;
       align-items: center;
       gap: 36px;
-      padding: 28px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.07);
+      padding: 30px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.075);
+      transition: background 0.2s;
     }
     .agenda-item:last-child { border-bottom: none; }
     .agenda-num {
       font-size: var(--ts-small);
-      font-weight: 600;
+      font-weight: 700;
       color: var(--accent);
-      width: 48px;
+      width: 52px;
       flex-shrink: 0;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
+      font-family: var(--mono);
     }
     .agenda-label {
       font-size: var(--ts-body);
-      font-weight: 500;
+      font-weight: 600;
+      letter-spacing: -0.01em;
     }
     .agenda-tag {
       margin-left: auto;
       font-size: var(--ts-label);
-      font-weight: 500;
+      font-weight: 600;
       color: var(--text-muted);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.05);
     }
 
     /* ── Instruction file box ───────────────────────────── */
     .file-box {
       background: var(--bg-mid);
-      border-radius: 14px;
+      border-radius: var(--radius-sm);
       padding: 30px 36px;
       display: flex;
       flex-direction: column;
       gap: 10px;
+      border: 1px solid rgba(255,255,255,0.07);
     }
     .file-path {
       font-family: var(--mono);
       font-size: var(--ts-small);
-      color: oklch(0.75 0.12 258);
+      color: oklch(0.78 0.14 258);
     }
     .file-desc {
       font-size: var(--ts-small);
-      color: oklch(0.65 0.01 240);
-      line-height: 1.5;
+      color: oklch(0.62 0.02 240);
+      line-height: 1.55;
     }
 
-    /* ── Big number highlight ───────────────────────────── */
+    /* ── Bottom accent bar on light slides ──────────────── */
+    section:not(.dark)::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 60%, transparent 100%);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    /* ── Links ──────────────────────────────────────────── */
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid oklch(0.58 0.20 258 / 0.3);
+      transition: border-color 0.2s;
+    }
+    a:hover { border-color: var(--accent); }
     .big-num {
       font-size: 160px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: -0.04em;
       line-height: 1;
       color: var(--accent);
-      opacity: 0.15;
+      opacity: 0.13;
+      font-family: var(--font-display);
     }
   </style>
 </head>
@@ -880,7 +1035,7 @@
   <!-- ─────────────────────────────── 01 Title ──── -->
   <section class="dark" data-label="Title" style="flex-direction: row; align-items: stretch;">
     <!-- accent bar -->
-    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--accent);"></div>
+    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));"></div>
 
     <!-- Left: text -->
     <div style="
@@ -892,10 +1047,10 @@
       <div class="eyebrow light" style="margin-bottom: 28px; max-width: 600px;">
         Geometric Machine Learning in Quantum Chemistry
       </div>
-      <h1 style="font-size: var(--ts-display); font-weight: 800; color: #fff; letter-spacing: -0.03em; margin-bottom: 32px;">
+      <h1 style="font-size: var(--ts-display); font-weight: 800; color: #fff; letter-spacing: -0.03em; margin-bottom: 32px; font-family: var(--font-display);">
         Tutorium 0
       </h1>
-      <h2 style="font-size: var(--ts-body); color: oklch(0.45 0.01 240); font-weight: 400; max-width: 680px;">
+      <h2 style="font-size: var(--ts-body); color: oklch(0.50 0.03 240); font-weight: 400; max-width: 680px; font-family: var(--font);">
         Introductions · Setup · Agent Workflow
       </h2>
     </div>
@@ -908,13 +1063,14 @@
     ">
       <!-- Glow behind molecule -->
       <div style="
-        position: absolute; width: 700px; height: 700px;
-        background: radial-gradient(circle, oklch(0.55 0.18 258 / 0.18) 0%, transparent 70%);
+        position: absolute; width: 750px; height: 750px;
+        background: radial-gradient(circle, oklch(0.58 0.20 258 / 0.22) 0%, oklch(0.58 0.19 168 / 0.08) 45%, transparent 70%);
         border-radius: 50%;
+        animation: moleculePulse 6s ease-in-out infinite, driftB 10s ease-in-out infinite;
       "></div>
 
       <!-- Caffeine molecule — ball-and-stick, 3D-ish -->
-      <svg viewBox="0 0 660 500" width="560" height="424" xmlns="http://www.w3.org/2000/svg" style="position: absolute; left: -30px; top: 305px; z-index: 2; filter: drop-shadow(0 8px 40px rgba(0,0,0,0.6));">
+      <svg viewBox="0 0 660 500" width="560" height="424" xmlns="http://www.w3.org/2000/svg" style="position: absolute; left: -30px; top: 305px; z-index: 2; filter: drop-shadow(0 8px 40px rgba(0,0,0,0.6)); animation: driftA 8.2s ease-in-out infinite;">
         <defs>
           <radialGradient id="gC" cx="35%" cy="30%" r="65%">
             <stop offset="0%" stop-color="#9CA3AF"/>
@@ -975,7 +1131,7 @@
       </svg>
 
       <!-- Dopamine molecule — top-right -->
-      <svg viewBox="0 0 660 510" width="380" height="294" xmlns="http://www.w3.org/2000/svg" filter="drop-shadow(0 8px 36px rgba(0,0,0,0.55))" style="position:absolute;right:18px;top:105px;z-index:3;pointer-events:none;">
+      <svg viewBox="0 0 660 510" width="380" height="294" xmlns="http://www.w3.org/2000/svg" filter="drop-shadow(0 8px 36px rgba(0,0,0,0.55))" style="position:absolute;right:18px;top:105px;z-index:3;pointer-events:none;animation: driftB 9.4s ease-in-out infinite 0.8s;">
         <defs>
           <radialGradient id="titleDpC" cx="35%" cy="30%" r="65%"><stop offset="0%" stop-color="#9CA3AF"/><stop offset="100%" stop-color="#111827"/></radialGradient>
           <radialGradient id="titleDpN" cx="35%" cy="30%" r="65%"><stop offset="0%" stop-color="#93C5FD"/><stop offset="100%" stop-color="#1E40AF"/></radialGradient>
@@ -1012,7 +1168,7 @@
       </svg>
 
       <!-- Adrenaline molecule — bottom-right -->
-      <svg viewBox="0 0 720 530" width="420" height="309" xmlns="http://www.w3.org/2000/svg" filter="drop-shadow(0 8px 36px rgba(0,0,0,0.55))" style="position:absolute;right:10px;bottom:160px;z-index:3;pointer-events:none;">
+      <svg viewBox="0 0 720 530" width="420" height="309" xmlns="http://www.w3.org/2000/svg" filter="drop-shadow(0 8px 36px rgba(0,0,0,0.55))" style="position:absolute;right:10px;bottom:160px;z-index:3;pointer-events:none;animation: driftC 10.2s ease-in-out infinite 1.2s;">
         <defs>
           <radialGradient id="titleAdC" cx="35%" cy="30%" r="65%"><stop offset="0%" stop-color="#9CA3AF"/><stop offset="100%" stop-color="#111827"/></radialGradient>
           <radialGradient id="titleAdN" cx="35%" cy="30%" r="65%"><stop offset="0%" stop-color="#93C5FD"/><stop offset="100%" stop-color="#1E40AF"/></radialGradient>
@@ -1081,24 +1237,28 @@
     padding: var(--sp-pt) var(--sp-px) var(--sp-pb);
   ">
     <div class="eyebrow" style="margin-bottom: 40px;">Today</div>
-    <h1 style="margin-bottom: 60px; font-size: 56px;">Agenda</h1>
+    <h1 style="margin-bottom: 60px; font-size: 56px; font-family: var(--font-display);">Agenda</h1>
 
     <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
       <div class="agenda-item">
         <span class="agenda-num">01</span>
         <span class="agenda-label">Introductions</span>
+        <span class="agenda-tag">Warm-up</span>
       </div>
       <div class="agenda-item">
         <span class="agenda-num">02</span>
-        <span class="agenda-label">Setup — VS Code, uv, Github Copilot</span>
+        <span class="agenda-label">Setup </span>
+        <span class="agenda-tag">VS Code, uv &amp; Copilot</span>
       </div>
       <div class="agenda-item">
         <span class="agenda-num">03</span>
-        <span class="agenda-label">AI Coding Agents — Getting started</span>
+        <span class="agenda-label">Coding Agents  </span>
+        <span class="agenda-tag">Getting started</span>
       </div>
       <div class="agenda-item">
         <span class="agenda-num">04</span>
-        <span class="agenda-label">Advanced Features — Instruction Files &amp; Plan Mode</span>
+        <span class="agenda-label"> Instruction Files &amp; Plan Mode</span>
+        <span class="agenda-tag">Advanced features</span>
       </div>
     </div>
   </section>
@@ -1109,15 +1269,16 @@
   ">
     <div style="
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 60% 50% at 50% 50%, oklch(0.55 0.18 258 / 0.12) 0%, transparent 70%);
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, oklch(0.58 0.20 258 / 0.14) 0%, transparent 70%),
+                  radial-gradient(ellipse 40% 35% at 20% 80%, oklch(0.58 0.19 168 / 0.08) 0%, transparent 60%);
     "></div>
     <div style="position: relative; display: flex; flex-direction: column; height: 100%;">
       <div class="eyebrow light" style="margin-bottom: 20px;">Warm-up</div>
-      <h1 style="font-size: 76px; font-weight: 800; color: #fff; letter-spacing: -0.03em; margin-bottom: 22px;">
+      <h1 style="font-size: 76px; font-weight: 800; color: #fff; letter-spacing: -0.03em; margin-bottom: 22px; font-family: var(--font-display);">
         Quick Introductions
       </h1>
       <p style="color: oklch(0.65 0.01 240); font-size: var(--ts-body); line-height: 1.5; max-width: 1180px; margin-bottom: 54px;">
-        Let's get to know each other! Only share what you're comfortable with — this isn't a test, and there are no wrong answers.
+        Let's get to know each other! Only share what you're comfortable with.
       </p>
 
       <div class="cols cols-3" style="position: relative; flex: 1; gap: 28px; align-items: stretch;">
@@ -1165,7 +1326,7 @@
 
     <!-- Dopamine molecule — right side -->
     <div style="position:absolute;left:30px;top:34%;transform:translateY(-50%);opacity:0.88;pointer-events:none;">
-      <svg viewBox="0 0 660 510" width="680" height="520" xmlns="http://www.w3.org/2000/svg" filter="drop-shadow(0 8px 36px rgba(0,0,0,0.55))">
+      <svg viewBox="0 0 660 510" width="680" height="520" xmlns="http://www.w3.org/2000/svg" filter="drop-shadow(0 8px 36px rgba(0,0,0,0.55))" style="animation: driftB 11s ease-in-out infinite; transform-origin: center center;">
         <defs>
           <radialGradient id="setupDpC" cx="35%" cy="30%" r="65%"><stop offset="0%" stop-color="#9CA3AF"/><stop offset="100%" stop-color="#111827"/></radialGradient>
           <radialGradient id="setupDpN" cx="35%" cy="30%" r="65%"><stop offset="0%" stop-color="#93C5FD"/><stop offset="100%" stop-color="#1E40AF"/></radialGradient>
@@ -1203,7 +1364,7 @@
 
     <div style="position:relative;z-index:1;">
       <div class="eyebrow light" style="text-align: center; margin-bottom: 28px;">Part 01</div>
-      <h1 style="font-size: 88px; font-weight: 800; color: #fff; letter-spacing: -0.03em;">Setup</h1>
+      <h1 style="font-size: 88px; font-weight: 800; color: #fff; letter-spacing: -0.03em; font-family: var(--font-display);">Setup</h1>
       <p style="margin-top: 28px; color: oklch(0.55 0.01 240); font-size: var(--ts-body);">
         VS Code · uv  · Github Copilot
       </p>
@@ -1215,7 +1376,7 @@
     padding: var(--sp-pt) var(--sp-px) var(--sp-pb);
   ">
     <div class="eyebrow" style="margin-bottom: 20px;">Step 1</div>
-    <h1 style="margin-bottom: var(--sp-gap);">VS Code &amp; Extensions</h1>
+    <h1 style="font-family: var(--font-display); margin-bottom: var(--sp-gap);">VS Code &amp; Extensions</h1>
 
     <div style="flex: 1; display: flex; align-items: flex-start; gap: 80px;">
       <div style="flex: 1;">
@@ -1262,7 +1423,7 @@
     padding: var(--sp-pt) var(--sp-px) var(--sp-pb);
   ">
     <div class="eyebrow" style="margin-bottom: 20px;">Step 2</div>
-    <h1 style="margin-bottom: var(--sp-gap);">uv</h1>
+    <h1 style="font-family: var(--font-display); margin-bottom: var(--sp-gap);">uv</h1>
 
     <div style="flex: 1; display: flex; gap: 80px; align-items: flex-start;">
       <div style="flex: 1; display: flex; flex-direction: column; gap: 28px;">
@@ -1285,7 +1446,7 @@
         </div>
 
         <p class="small" style="color: var(--text-muted); line-height: 1.5;">
-          Reference: <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">docs.astral.sh/uv/getting-started/installation/</a>
+          Reference: <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank" rel="noopener noreferrer">docs.astral.sh/uv/getting-started/installation/</a>
         </p>
       </div>
 
@@ -1310,11 +1471,11 @@
     padding: var(--sp-pt) var(--sp-px) var(--sp-pb);
   ">
     <div class="eyebrow" style="margin-bottom: 20px;">Step 3</div>
-    <h1 style="margin-bottom: var(--sp-gap);">Repository Setup</h1>
+    <h1 style="font-family: var(--font-display); margin-bottom: var(--sp-gap);">Repository Setup</h1>
 
     <div style="flex: 1; display: flex; gap: 80px; align-items: flex-start;">
       <div style="flex: 1; display: flex; flex-direction: column; gap: 32px;">
-        <p class="small" style="color: var(--text-muted);">Go to <strong style="color: var(--text-dark);">github.com/jannisdemel/Tut0</strong>. If you have Git, clone the repository. Otherwise, download it to your MacBook.</p>
+        <p class="small" style="color: var(--text-muted);">Go to <strong style="color: var(--text-dark);">github.com/jannisdemel/Tut0</strong>. If you have Git, clone the repository. Otherwise, download it as a ZIP and extract it.</p>
 
         <div class="code-block" style="font-size: 24px;">
           <div><span class="comment"># Open this folder in VS Code, then run:</span></div>
@@ -1359,7 +1520,7 @@
 
     <!-- Adrenaline molecule — left side -->
     <div style="position:absolute;left:-40px;top:50%;transform:translateY(-50%);opacity:0.88;pointer-events:none;">
-      <svg viewBox="0 0 720 530" width="700" height="514" xmlns="http://www.w3.org/2000/svg" filter="drop-shadow(0 8px 36px rgba(0,0,0,0.55))">
+      <svg viewBox="0 0 720 530" width="700" height="514" xmlns="http://www.w3.org/2000/svg" filter="drop-shadow(0 8px 36px rgba(0,0,0,0.55))" style="animation: driftC 12s ease-in-out infinite 0.7s; transform-origin: center center;">
         <defs>
           <radialGradient id="adC" cx="35%" cy="30%" r="65%"><stop offset="0%" stop-color="#9CA3AF"/><stop offset="100%" stop-color="#111827"/></radialGradient>
           <radialGradient id="adN" cx="35%" cy="30%" r="65%"><stop offset="0%" stop-color="#93C5FD"/><stop offset="100%" stop-color="#1E40AF"/></radialGradient>
@@ -1403,7 +1564,7 @@
 
     <div style="position:relative;z-index:1;">
       <div class="eyebrow light" style="text-align: center; margin-bottom: 28px;">Part 02</div>
-      <h1 style="font-size: 88px; font-weight: 800; color: #fff; letter-spacing: -0.03em;">AI Coding Agents</h1>
+      <h1 style="font-size: 88px; font-weight: 800; color: #fff; letter-spacing: -0.03em; font-family: var(--font-display);">AI Coding Agents</h1>
       <p style="margin-top: 28px; color: oklch(0.55 0.01 240); font-size: var(--ts-body);">
        GitHub Copilot · Codex · Claude Code
       </p>
@@ -1415,22 +1576,22 @@
     padding: var(--sp-pt) var(--sp-px) var(--sp-pb);
   ">
     <div class="eyebrow" style="margin-bottom: 20px;">Concepts</div>
-    <h1 style="margin-bottom: var(--sp-gap);">What Is an AI Coding Agent?</h1>
+    <h1 style="font-family: var(--font-display); margin-bottom: var(--sp-gap);">What Is an AI Coding Agent?</h1>
 
     <div style="flex: 1; display: flex; flex-direction: column; gap: 28px;">
       <div class="cols cols-3" style="flex: 1; align-items: stretch;">
         <div class="card">
-          <div style="font-size: 48px; margin-bottom: 4px; color: var(--accent);">Read</div>
+          <div style="font-size: 48px; margin-bottom: 4px; color: var(--accent); font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em;">Read</div>
           <div class="card-title">Understands context</div>
           <div class="card-body">Reads your files, project structure, and instructions to understand what you're working on.</div>
         </div>
         <div class="card">
-          <div style="font-size: 48px; margin-bottom: 4px; color: var(--accent);">Suggest</div>
+          <div style="font-size: 48px; margin-bottom: 4px; color: var(--accent2); font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em;">Suggest</div>
           <div class="card-title">Proposes changes</div>
           <div class="card-body">Generates code completions, edits, or full implementations — inline or in chat.</div>
         </div>
         <div class="card">
-          <div style="font-size: 48px; margin-bottom: 4px; color: var(--accent);">Act</div>
+          <div style="font-size: 48px; margin-bottom: 4px; color: var(--accent3); font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em;">Act</div>
           <div class="card-title">Can run commands</div>
           <div class="card-body">Advanced agents can execute shell commands, run tests, and iterate until the task is done.</div>
         </div>
@@ -1451,7 +1612,7 @@
     padding: var(--sp-pt) var(--sp-px) var(--sp-pb);
   ">
     <div class="eyebrow" style="margin-bottom: 20px;">Primary tool for this tutorial</div>
-    <h1 style="margin-bottom: var(--sp-gap);">GitHub Copilot</h1>
+    <h1 style="font-family: var(--font-display); margin-bottom: var(--sp-gap);">GitHub Copilot</h1>
 
     <div style="flex: 1; display: flex; gap: 80px; align-items: flex-start;">
       <div style="flex: 1.1; display: flex; flex-direction: column; gap: 28px;">
@@ -1476,11 +1637,11 @@
       </div>
 
       <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
-        <div class="card" style="background: oklch(0.55 0.18 258 / 0.07); gap: 14px;">
-          <div class="card-title" style="color: var(--accent);">Open inline chat editor</div>
-          <div class="code-block" style="background: #0D1117; font-size: 26px;">
-            <span class="comment"># this opens the inline chat editor</span><br/>
-            <span class="cmd">Ctrl+Alt+I</span> <span class="comment">/ on Mac: ⌘I</span>
+        <div class="card" style="background: oklch(0.58 0.20 258 / 0.07); gap: 14px;">
+          <div class="card-title" style="color: var(--accent);">Open Copilot Chat</div>
+          <div class="code-block" style="background: #090D15; font-size: 26px;">
+            <span class="comment"># Open the inline chat editor</span><br/>
+            <span class="cmd">Ctrl</span><span style="color:#4D5566;">+</span><span class="cmd">Alt</span><span style="color:#4D5566;">+</span><span class="cmd">I</span>&nbsp;&nbsp;<span class="comment">/ macOS: ⌘I</span>
           </div>
         </div>
         <div class="card" style="gap: 10px;">
@@ -1496,7 +1657,7 @@
     padding: var(--sp-pt) var(--sp-px) var(--sp-pb);
   ">
     <div class="eyebrow" style="margin-bottom: 20px;">Optional — for existing subscribers</div>
-    <h1 style="margin-bottom: var(--sp-gap);">OpenAI Codex &amp; Claude Code</h1>
+    <h1 style="font-family: var(--font-display); margin-bottom: var(--sp-gap);">OpenAI Codex &amp; Claude Code</h1>
 
     <div style="flex: 1; display: flex; gap: 60px; align-items: stretch;">
 
@@ -1515,9 +1676,9 @@
         </div>
         <div class="card" style="gap: 10px; background: oklch(0.55 0.18 258 / 0.06); padding: 18px 20px;">
           <div class="card-title" style="color: var(--accent); font-size: var(--ts-small);">Docs</div>
-          <div class="card-body" style="font-size: var(--ts-small);">Get started with Codex in the <a href="https://developers.openai.com/codex/quickstart" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">official quickstart</a>.</div>
+          <div class="card-body" style="font-size: var(--ts-small);">Get started with Codex in the <a href="https://developers.openai.com/codex/quickstart" target="_blank" rel="noopener noreferrer">official quickstart</a>.</div>
         </div>
-        <div style="font-size: var(--ts-label); color: var(--text-muted);">Codex is included with ChatGPT Plus, Pro, Business, and Enterprise/Edu plans. For a limited time Codex is included with ChatGPT Free and Go</div>
+        <div style="font-size: var(--ts-label); color: var(--text-muted);">Codex is included with ChatGPT Plus, Pro, Business, and Enterprise/Edu plans. For a limited time, Codex is also available on ChatGPT Free and Go.</div>
       </div>
 
       <div class="card" style="flex: 1; gap: 20px; background: oklch(0.97 0.008 280);">
@@ -1531,17 +1692,17 @@
           <div class="card-title" style="font-size: var(--ts-sub);">Claude Code</div>
         </div>
         <div class="card-body" style="font-size: var(--ts-small);">
-          Anthropic's coding agent. Use it in VS Code via the Codex extension or directly in the terminal.
+          Anthropic's coding agent. Use it directly in the terminal or via the Claude Code extension for VS Code.
         </div>
         <div class="card" style="gap: 10px; background: oklch(0.55 0.18 258 / 0.06); padding: 18px 20px;">
           <div class="card-title" style="color: var(--accent); font-size: var(--ts-small);">Docs</div>
-          <div class="card-body" style="font-size: var(--ts-small);">See the <a href="https://code.claude.com/docs/en/quickstart" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">Claude Code quickstart</a> in the docs.</div>
+          <div class="card-body" style="font-size: var(--ts-small);">See the <a href="https://code.claude.com/docs/en/quickstart" target="_blank" rel="noopener noreferrer">Claude Code quickstart</a> in the docs.</div>
         </div>
         <div style="font-size: var(--ts-label); color: var(--text-muted);">Requires a Claude subscription</div>
       </div>
 
       <div class="card" style="flex: 0.7; gap: 20px; justify-content: center; background: #F4F5F7;">
-        <div class="card-title" style="font-size: var(--ts-small); text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted);">All three can </div>
+        <div class="card-title" style="font-size: var(--ts-small); text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted);">All three can …</div>
         
         <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px;">
           <li style="display: flex; gap: 14px; align-items: flex-start; font-size: var(--ts-small);">
@@ -1562,7 +1723,7 @@
           </li>
         </ul>
         <div style="margin-top: 12px; padding: 16px 20px; background: #fff; border-radius: 12px; font-size: var(--ts-label); color: var(--text-muted); line-height: 1.5;">
-          <strong style="color: var(--text-dark);">GitHub Copilot CLI:</strong> There is also a CLI. See the <a href="https://github.com/features/copilot/cli" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">docs</a>.
+          <strong style="color: var(--text-dark);">GitHub Copilot CLI:</strong> There is also a CLI. See the <a href="https://github.com/features/copilot/cli" target="_blank" rel="noopener noreferrer">docs</a>.
         </div>
       </div>
 
@@ -1575,10 +1736,17 @@
   ">
     <div style="
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(0.55 0.18 258 / 0.15) 0%, transparent 70%);
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, oklch(0.58 0.20 258 / 0.18) 0%, oklch(0.58 0.19 168 / 0.07) 50%, transparent 75%);
     "></div>
+    <!-- Animated ring -->
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+      <div style="width:520px;height:520px;border-radius:50%;border:1.5px solid oklch(0.58 0.20 258 / 0.18);"></div>
+    </div>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+      <div style="width:720px;height:720px;border-radius:50%;border:1px solid oklch(0.58 0.20 258 / 0.09);"></div>
+    </div>
     <!-- Faint molecule watermark bottom-right -->
-    <svg style="position:absolute;bottom:-60px;right:-60px;opacity:0.06;pointer-events:none" viewBox="0 0 660 500" width="520" height="395" xmlns="http://www.w3.org/2000/svg">
+    <svg style="position:absolute;bottom:-60px;right:-60px;opacity:0.06;pointer-events:none;animation: driftA 14s ease-in-out infinite;" viewBox="0 0 660 500" width="520" height="395" xmlns="http://www.w3.org/2000/svg">
       <g stroke="white" stroke-linecap="round" fill="none">
         <line x1="195" y1="185" x2="272" y2="148" stroke-width="8"/>
         <line x1="272" y1="148" x2="352" y2="182" stroke-width="8"/>
@@ -1609,14 +1777,14 @@
     </svg>
     <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 36px;">
       <div class="eyebrow light">Let's go</div>
-      <h1 style="font-size: var(--ts-display); font-weight: 800; color: #fff; letter-spacing: -0.03em;">
+      <h1 style="font-size: var(--ts-display); font-weight: 800; color: #fff; letter-spacing: -0.03em; font-family: var(--font-display);">
         Time to code.
       </h1>
       <p style="font-size: var(--ts-body); color: oklch(0.55 0.01 240); max-width: 900px; line-height: 1.6;">
         Open task1/task1_xyz.ipynb and use GitHub Copilot to solve the tasks.
       </p>
       <div style="display: flex; gap: 20px; margin-top: 12px;">
-        <div class="pill">github.com/jannisdemel/Tut0</div>
+        <div class="pill dark-pill">github.com/jannisdemel/Tut0</div>
       </div>
     </div>
   </section>
@@ -1625,8 +1793,8 @@
   <section data-label="Instruction Files How They Work" style="
     padding: var(--sp-pt) var(--sp-px) var(--sp-pb);
   ">
-    <h1 style="margin-bottom: 16px;">Instruction Files</h1>
-    <h2 style="margin-bottom: var(--sp-gap); font-size: var(--ts-body);">Persistent rules that Copilot reads automatically on every request</h2>
+    <div class="eyebrow" style="margin-bottom: 20px;">Advanced features</div>
+    <h1 style="margin-bottom: 16px; font-family: var(--font-display);">Instruction Files</h1>
 
     <div style="flex: 1; display: flex; gap: 60px; align-items: flex-start;">
       <div style="flex: 1.1; display: flex; flex-direction: column; gap: 24px;">
@@ -1651,19 +1819,19 @@
       <div style="flex: 1; display: flex; flex-direction: column; gap: 24px;">
         <div class="card" style="gap: 18px;">
           <div class="card-title">Which instruction file is used here?</div>
-          <div class="card-body">The used instruction file is a slightly adapted version of a popular <a href="https://github.com/multica-ai/andrej-karpathy-skills/blob/main/CLAUDE.md" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">instruction file</a> that is based on work by the researcher Andrej Karpathy. Feel free to change it to your liking!</div>
+          <div class="card-body">The used instruction file is a slightly adapted version of a popular <a href="https://github.com/multica-ai/andrej-karpathy-skills/blob/main/CLAUDE.md" target="_blank" rel="noopener noreferrer">instruction file</a> that is based on work by the researcher Andrej Karpathy. Feel free to change it to your liking!</div>
         </div>
         <div class="card" style="gap: 18px; background: oklch(0.55 0.18 258 / 0.07);">
           <div class="card-title" style="color: var(--accent);">More info</div>
           <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
             <li style="display: flex; gap: 14px; align-items: flex-start; font-size: var(--ts-small); color: var(--text-muted); line-height: 1.55;">
-              <span style="color: var(--accent); font-size: var(--ts-small); flex-shrink: 0;">→</span><span>For more on custom instructions in GitHub Copilot, see the <a href="https://docs.github.com/en/copilot/how-tos/configure-custom-instructions" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">docs</a>.</span>
+              <span style="color: var(--accent); font-size: var(--ts-small); flex-shrink: 0;">→</span><span>For more on custom instructions in GitHub Copilot, see the <a href="https://docs.github.com/en/copilot/how-tos/configure-custom-instructions" target="_blank" rel="noopener noreferrer">docs</a>.</span>
             </li>
             <li style="display: flex; gap: 14px; align-items: flex-start; font-size: var(--ts-small); color: var(--text-muted); line-height: 1.55;">
-              <span style="color: var(--accent); font-size: var(--ts-small); flex-shrink: 0;">→</span><span>Claude Code uses a similar <span style="font-family: var(--mono);">CLAUDE.md</span>-based setup. See the <a href="https://code.claude.com/docs" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">docs</a>.</span>
+              <span style="color: var(--accent); font-size: var(--ts-small); flex-shrink: 0;">→</span><span>Claude Code uses a similar <span style="font-family: var(--mono);">CLAUDE.md</span>-based setup. See the <a href="https://code.claude.com/docs" target="_blank" rel="noopener noreferrer">docs</a>.</span>
             </li>
             <li style="display: flex; gap: 14px; align-items: flex-start; font-size: var(--ts-small); color: var(--text-muted); line-height: 1.55;">
-              <span style="color: var(--accent); font-size: var(--ts-small); flex-shrink: 0;">→</span><span>Codex uses <span style="font-family: var(--mono);">AGENTS.md</span> files. See the <a href="https://developers.openai.com/codex/guides/agents-md" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">docs</a>.</span>
+              <span style="color: var(--accent); font-size: var(--ts-small); flex-shrink: 0;">→</span><span>Codex uses <span style="font-family: var(--mono);">AGENTS.md</span> files. See the <a href="https://developers.openai.com/codex/guides/agents-md" target="_blank" rel="noopener noreferrer">docs</a>.</span>
             </li>
           </ul>
         </div>
@@ -1675,8 +1843,8 @@
   <section data-label="Plan Mode" style="
     padding: var(--sp-pt) var(--sp-px) var(--sp-pb);
   ">
-    <div class="eyebrow" style="margin-bottom: 20px;"> Advanced features</div>
-    <h1 style="margin-bottom: var(--sp-gap);">Plan Mode</h1>
+    <div class="eyebrow" style="margin-bottom: 20px;">Advanced features</div>
+    <h1 style="font-family: var(--font-display); margin-bottom: var(--sp-gap);">Plan Mode</h1>
 
     <div style="flex: 1; display: flex; gap: 80px; align-items: flex-start;">
       <div style="flex: 1.2; display: flex; flex-direction: column; gap: 32px;">
@@ -1684,25 +1852,25 @@
           Plan mode makes Copilot <strong style="color: var(--text-dark);">think before it acts</strong>. It analyzes the task and creates a step-by-step plan — but does not edit any files until you approve.
         </p>
 
-        <div style="display: flex; flex-direction: column; gap: 0; border-radius: 16px; overflow: hidden; border: 1px solid rgba(0,0,0,0.08);">
+        <div style="display: flex; flex-direction: column; gap: 0; border-radius: 18px; overflow: hidden; border: 1px solid rgba(0,0,0,0.09); box-shadow: var(--shadow-card);">
           <div style="padding: 28px 36px; background: #fff; display: flex; gap: 24px; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.06);">
-            <div style="width: 52px; height: 52px; border-radius: 50%; background: var(--accent-dim); color: var(--accent); font-size: var(--ts-small); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">1</div>
+            <div style="width: 52px; height: 52px; border-radius: 14px; background: var(--accent-dim); color: var(--accent); font-size: var(--ts-small); display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; border: 1.5px solid oklch(0.58 0.20 258 / 0.22);">1</div>
             <div>
-              <div style="font-size: var(--ts-small); font-weight: 600;">You describe the task</div>
+              <div style="font-size: var(--ts-small); font-weight: 700;">You describe the task</div>
               <div style="font-size: var(--ts-label); color: var(--text-muted);">in Copilot Chat</div>
             </div>
           </div>
           <div style="padding: 28px 36px; background: #fff; display: flex; gap: 24px; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.06);">
-            <div style="width: 52px; height: 52px; border-radius: 50%; background: var(--accent-dim); color: var(--accent); font-size: var(--ts-small); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">2</div>
+            <div style="width: 52px; height: 52px; border-radius: 14px; background: oklch(0.58 0.19 168 / 0.12); color: oklch(0.58 0.19 168); font-size: var(--ts-small); display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; border: 1.5px solid oklch(0.58 0.19 168 / 0.25);">2</div>
             <div>
-              <div style="font-size: var(--ts-small); font-weight: 600;">Copilot analyzes and proposes a plan</div>
+              <div style="font-size: var(--ts-small); font-weight: 700;">Copilot analyses and proposes a plan</div>
               <div style="font-size: var(--ts-label); color: var(--text-muted);">No files are touched yet</div>
             </div>
           </div>
           <div style="padding: 28px 36px; background: #fff; display: flex; gap: 24px; align-items: center;">
-            <div style="width: 52px; height: 52px; border-radius: 50%; background: var(--accent-dim); color: var(--accent); font-size: var(--ts-small); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">3</div>
+            <div style="width: 52px; height: 52px; border-radius: 14px; background: oklch(0.70 0.18 45 / 0.12); color: oklch(0.62 0.18 45); font-size: var(--ts-small); display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; border: 1.5px solid oklch(0.70 0.18 45 / 0.25);">3</div>
             <div>
-              <div style="font-size: var(--ts-small); font-weight: 600;">You review &amp; approve</div>
+              <div style="font-size: var(--ts-small); font-weight: 700;">You review &amp; approve</div>
               <div style="font-size: var(--ts-label); color: var(--text-muted);">Copilot executes once confirmed</div>
             </div>
           </div>
@@ -1732,9 +1900,16 @@
   ">
     <div style="
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(0.55 0.18 258 / 0.15) 0%, transparent 70%);
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, oklch(0.58 0.20 258 / 0.18) 0%, oklch(0.58 0.19 168 / 0.07) 50%, transparent 75%);
     "></div>
-    <svg style="position:absolute;bottom:-60px;right:-60px;opacity:0.06;pointer-events:none" viewBox="0 0 660 500" width="520" height="395" xmlns="http://www.w3.org/2000/svg">
+    <!-- Animated rings -->
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+      <div style="width:520px;height:520px;border-radius:50%;border:1.5px solid oklch(0.58 0.20 258 / 0.18);"></div>
+    </div>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+      <div style="width:720px;height:720px;border-radius:50%;border:1px solid oklch(0.58 0.20 258 / 0.09);"></div>
+    </div>
+    <svg style="position:absolute;bottom:-60px;right:-60px;opacity:0.06;pointer-events:none;animation: driftB 14.5s ease-in-out infinite 0.4s;" viewBox="0 0 660 500" width="520" height="395" xmlns="http://www.w3.org/2000/svg">
       <g stroke="white" stroke-linecap="round" fill="none">
         <line x1="195" y1="185" x2="272" y2="148" stroke-width="8"/>
         <line x1="272" y1="148" x2="352" y2="182" stroke-width="8"/>
@@ -1765,14 +1940,14 @@
     </svg>
     <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 36px;">
       <div class="eyebrow light">Let's go</div>
-      <h1 style="font-size: var(--ts-display); font-weight: 800; color: #fff; letter-spacing: -0.03em;">
+      <h1 style="font-size: var(--ts-display); font-weight: 800; color: #fff; letter-spacing: -0.03em; font-family: var(--font-display);">
         Time to code.
       </h1>
       <p style="font-size: var(--ts-body); color: oklch(0.55 0.01 240); max-width: 900px; line-height: 1.6;">
         Open task2/task2_molecule_match.ipynb and work with the agent to solve the tasks.
       </p>
       <div style="display: flex; gap: 20px; margin-top: 12px;">
-        <div class="pill">github.com/jannisdemel/Tut0</div>
+        <div class="pill dark-pill">github.com/jannisdemel/Tut0</div>
       </div>
     </div>
   </section>
