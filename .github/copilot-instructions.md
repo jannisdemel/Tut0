@@ -1,5 +1,6 @@
 **Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
 
+Please always mention that you read this file.
 ## 1. Think Before Coding
 
 **Don't assume. Don't hide confusion. Surface tradeoffs.**
