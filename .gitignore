@@ -1,0 +1,21 @@
+# Instructor-only materials
+task2/instructor_answer_key.md
+task2/task2_molecule_match_solution.ipynb
+
+# uv / local environments
+.venv/
+.uv-cache/
+uv.lock
+
+# Python caches and test artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local environment files
+.env
+.env.*
