@@ -1,7 +1,8 @@
 # Geometric Machine Learning in Quantum Chemistry: Tutorium 0
 
 This repository contains the notebooks and data files for Tutorium 0. The
-recommended setup is VS Code + GitHub Copilot + `uv`. Advanced users can also
+recommended setup is VS Code + GitHub Copilot + `uv`. 
+Advanced users can also
 use terminal-based coding agents such as GitHub Copilot CLI, Claude Code, or
 OpenAI Codex CLI.
 
@@ -100,18 +101,6 @@ If you see `setup ok`, the Python environment works.
    `.venv`, `gmlqc-tut0`, or something similar.
 5. Click **Run All**.
 
-After that, continue with:
-
-- `task1/task1_xyz.ipynb`
-- `task2/task2_molecule_match.ipynb`
-
-If VS Code cannot find the kernel, run this once:
-
-```bash
-uv run python -m ipykernel install --user --name gmlqc-tut0 --display-name "Python (gmlqc-tut0)"
-```
-
-Then restart VS Code and select the kernel named `Python (gmlqc-tut0)`.
 
 ## Working with AI coding assistants
 
@@ -120,44 +109,13 @@ already have a ChatGPT or Claude subscription, you may also be able to use
 OpenAI Codex or Claude Code. These tools are optional; Copilot in VS Code is
 enough for the tutorial.
 
-### GitHub Copilot in VS Code
-
-Use Copilot Chat when you want explanations, debugging help, or hints. Good
-prompts for this course:
-
-- "Explain this notebook cell and the error I got."
-- "Give me a hint, but do not write the full solution."
-- "Check whether my function handles the example molecule correctly."
-- "Help me debug this notebook cell step by step."
-
-### Agent mode
-
-Agent mode is for larger tasks where Copilot should inspect files, propose
-edits, and sometimes suggest terminal commands. In VS Code, open Copilot Chat
-and choose **Agent** from the mode dropdown.
-
-Use Agent mode for tasks such as:
-
-- "Find why this notebook import fails and suggest a fix."
-- "Check the task instructions against my solution and point out problems."
-- "Refactor this helper function without changing the exercise result."
-
-Be careful: an agent can edit files. Read the diff before accepting changes,
-especially in exercise notebooks.
-
 ### Plan mode
 
 Plan mode is useful before making changes. Copilot analyzes the task and creates
 a plan first, but does not edit files until you review and approve the plan. Use
 it when you are unsure what steps are needed or when the task has several parts.
 
-In VS Code, open Copilot Chat and choose **Plan** from the mode dropdown. A good
-prompt is:
-
-```text
-Make a plan for solving task1. Do not write the solution yet. Identify the files
-I should read and the checks I should run.
-```
+In VS Code, open Copilot Chat and choose **Plan** from the mode dropdown.
 
 ### Instruction files
 
@@ -283,45 +241,4 @@ codex
 When prompted, sign in with ChatGPT if your plan supports Codex, or configure an
 API key if you are using API billing.
 
-## Common problems
 
-### `uv` is not found
-
-Close and reopen the terminal. If it still does not work, restart VS Code. On
-Windows, make sure you are using a new PowerShell terminal after installing
-`uv`.
-
-### VS Code asks me to install Python
-
-That is normal if VS Code has not detected the environment yet. First run:
-
-```bash
-uv sync
-```
-
-Then use **Select Kernel** in the notebook and choose the `.venv` environment.
-
-### The notebook uses the wrong Python
-
-Check the selected kernel in the top right of the notebook. It should be the
-environment from this repository, not a global Python installation.
-
-### Packages are missing
-
-Run:
-
-```bash
-uv sync
-```
-
-Then restart the notebook kernel and run the cells again.
-
-## Setup checklist
-
-- VS Code installed
-- Python and Jupyter extensions installed in VS Code
-- GitHub Copilot extension installed in VS Code
-- Signed in to GitHub in VS Code
-- `uv --version` works in the terminal
-- `uv sync` runs successfully in this repository
-- `task0/test_imports.ipynb` runs with the repository kernel
