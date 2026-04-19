@@ -17,6 +17,9 @@ Available packages:
 - The declared dependencies are `ipykernel`, `jupyter`, `matplotlib`and `numpy`.
 - Prefer these available packages; do not suggest installing additional packages unless explicitly requested.
 
+Plan mode:
+- If we need are in plan mode to plan teh solution, ask questions to clarify the task and get user input.
+
 The final solution (so the four found molecules) should be placed in the markdown cell under the "Final answer" section.
 
 Ignore the section "Extra task" for now as it is only if there is time left. Only work on it if specifically propmpted. If working on it though, you do not need to use only the declared dependencies.
